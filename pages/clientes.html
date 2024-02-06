@@ -1,1 +1,59 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="../index.html">pagina inicial</a>
+  
+    <details>
+        <summary>adcionar item</summary>
+
+        <form>
+            <input type="text" placeholder="nome" id="nome">
+            <input type="text" placeholder="cpf" id="cpf">
+            <input type="text" placeholder="telefone" id="telefone">
+            <input type="text" placeholder="email" id="email">
+        </form>
+    </details>
+
+ 
+    <table id="table"></table>
+
+    <script>
+
+
+
+        const table = document.querySelector("#table")
+          async function createTable() {
+            let items = await window.db.getCostumers()  
+            // console.log(items) 
+            table.innerHTML = window.db.getTable(items, ["id", "nome", "cpf","telefone","email"]
+            )
+
+        } createTable()
+
+        document.querySelector("form").addEventListener("submit",async(e)=>{
+            e.preventDefault()
+
+            const nome = window.querySelector("#nome")
+            const cpf = window.querySelector("#cpf")
+            const telefone = window.querySelector("#telefone")
+            const email = window.querySelector("#email")
+
+            window.db.add("clientes",{
+                nome:nome.value,
+                cpf:cpf.value,
+                telefone:telefone.value,
+                email:email.value
+            })
+
+            
+        })
+    </script>
+    
+</body>
+</html>

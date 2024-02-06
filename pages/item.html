@@ -10,23 +10,19 @@
 </head>
 
 <body>
-    teste
+    
+    <a href="../index.html">pagina inicial</a>
   
     <details>
         <summary>adcionar item</summary>
 
         <form>
 
-            <input type="text" id="item-name" placeholder="nome do produto">
+            <input type="text" id="item-name" placeholder="nome do produto" min="1">
             <input type="text" id="item-description" placeholder="descricao">
             <input type="submit" placeholder="adcionarS">
         </form>
     </details>
-
-    <div id="container-tabela">
-        container tabela
-    </div>
-
     <table id="table"></table>
 
     <script>
@@ -39,12 +35,17 @@
             )
 
         } createTable()
-        const name = document.querySelector("#item-name")
-        const description = document.querySelector("#item-description")
+
 
         document.querySelector("form").addEventListener("submit", async (e) => {
             e.preventDefault()
-            console.log("submit"  + [name.value ,description.value])
+            <!-- console.log("submit"  + [name.value ,description.value]) -->
+
+            const name = document.querySelector("#item-name")
+            const description = document.querySelector("#item-description")
+
+            if(!name.value)return 
+
             await window.db.add("items",{
                 nome:name.value,
                 descricao:description.value

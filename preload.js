@@ -1,5 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron')
-const {getItems,add} = require("./db_functions")
+const {getItems,add, getCostumers} = require("./db_functions")
 const {getTable} = require("./pageInterations")
 
 window.addEventListener('DOMContentLoaded', async () => {
@@ -16,8 +16,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 contextBridge.exposeInMainWorld('db',{
 
   getItems:getItems,
+  getCostumers:getCostumers,
   getTable : getTable,
-  add:add
+  add:add,
 }
 
 
