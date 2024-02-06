@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+    <!-- tirar trava de seguranca -->
+    <title>Document</title>
+</head>
+
+<body>
+    teste
+  
+    <details>
+        <summary>adcionar item</summary>
+
+        <form>
+
+            <input type="text" id="item-name" placeholder="nome do produto">
+            <input type="text" id="item-description" placeholder="descricao">
+            <input type="submit" placeholder="adcionarS">
+        </form>
+    </details>
+
+    <div id="container-tabela">
+        container tabela
+    </div>
+
+    <table id="table"></table>
+
+    <script>
+
+        const table = document.querySelector("#table")
+        async function createTable() {
+            let items = await window.db.getItems()  
+            // console.log(items) 
+            table.innerHTML = window.db.getTable(items, ["id", "nome", "descricao"]
+            )
+
+        } createTable()
+        const name = document.querySelector("#item-name")
+        const description = document.querySelector("#item-description")
+
+        document.querySelector("form").addEventListener("submit", async (e) => {
+            e.preventDefault()
+            console.log("submit"  + [name.value ,description.value])
+            await window.db.add("items",{
+                nome:name.value,
+                descricao:description.value
+            })
+            createTable()
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>
