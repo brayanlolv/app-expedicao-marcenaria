@@ -17,6 +17,7 @@
             <input type="text" placeholder="cpf" id="cpf">
             <input type="text" placeholder="telefone" id="telefone">
             <input type="text" placeholder="email" id="email">
+            <input type="submit">
         </form>
     </details>
 
@@ -27,8 +28,8 @@
 
 
 
-        const table = document.querySelector("#table")
-          async function createTable() {
+            const table = document.querySelector("#table")
+            async function createTable() {
             let items = await window.db.getCostumers()  
             // console.log(items) 
             table.innerHTML = window.db.getTable(items, ["id", "nome", "cpf","telefone","email"]
@@ -39,10 +40,10 @@
         document.querySelector("form").addEventListener("submit",async(e)=>{
             e.preventDefault()
 
-            const nome = window.querySelector("#nome")
-            const cpf = window.querySelector("#cpf")
-            const telefone = window.querySelector("#telefone")
-            const email = window.querySelector("#email")
+            const nome = document.querySelector("#nome")
+            const cpf = document.querySelector("#cpf")
+            const telefone = document.querySelector("#telefone")
+            const email = document.querySelector("#email")
 
             window.db.add("clientes",{
                 nome:nome.value,
@@ -50,6 +51,7 @@
                 telefone:telefone.value,
                 email:email.value
             })
+            createTable()
 
             
         })
