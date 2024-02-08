@@ -25,9 +25,18 @@
         const table = document.querySelector("#table")
         async function createTable() {
             let items = await window.db.getPedidos({},true)  
-             console.log(items) 
-            table.innerHTML = window.db.getTable(items, ["id", "nome", "cpf","telefone","email"]
+             //<!-- console.log(items)  -->
+            table.innerHTML = window.db.getTable(items, ["id", "nome", "codigo", "data", "endereco"]
             )
+            let tr = document.getElementsByClassName("tr")
+            //let tr = document.querySelectorAll(".tr")
+           for(let i = 0; i< tr.length;i++){
+            tr[i].addEventListener("click",()=>{
+                let id = tr[i].querySelector("td").innerText
+                console.log(id)
+            window.db.pedidosWindow({id:34})
+            })
+           }
 
         } createTable()
     </script>

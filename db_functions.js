@@ -44,16 +44,16 @@ async function getPedidos({ id = null, codigo = null, cliente_id = null, } = {},
   const result = await db.select("*").from("pedidos").where(whereParam)
 
   if (!name) {
-    console.log(result)
+    // console.log(result)
     return result
   }
   console.log("bora")
 
   for(let i = 0;i < result.length;){
     await getCostumers({ id: result[i].cliente_id }).then((costumer) => {
-      console.log(costumer[0].nome)
+      // console.log(costumer[0].nome)
       result[i].nome = costumer[0].nome
-      console.log(result[i])
+      // console.log(result[i])
       i++
     })
   }
@@ -63,8 +63,8 @@ async function getPedidos({ id = null, codigo = null, cliente_id = null, } = {},
     
 
   // }) nao funcionou o async do jeito q precisava
-  console.log("result")
-  console.log(result)
+  // console.log("result")
+  // console.log(result)
   return result
 
 }

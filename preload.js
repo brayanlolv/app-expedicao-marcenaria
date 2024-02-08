@@ -1,6 +1,7 @@
 const { contextBridge, ipcRenderer } = require('electron')
 const {getItems,add, getCostumers, getPedidos} = require("./db_functions")
 const {getTable} = require("./pageInterations")
+const {pedidosWindow} = require("./windows")
 
 window.addEventListener('DOMContentLoaded', async () => {
   function replaceText (selector, text){
@@ -19,7 +20,10 @@ contextBridge.exposeInMainWorld('db',{
   getCostumers:getCostumers,
   getTable : getTable,
   add:add,
-  getPedidos:getPedidos
+  getPedidos:getPedidos,
+  pedidosWindow:(arguments)=>{
+    console.log("chamdo pleo preload")
+    ipcRenderer.send("pedidos-Window",arguments)}
 }
 
 

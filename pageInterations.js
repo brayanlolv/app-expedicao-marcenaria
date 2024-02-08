@@ -14,7 +14,7 @@ function getTable( resultArray, columnsArray) {
             tr += `<td> ${data}  </td>`
         }
 
-        return `<tr>${tr}</tr>`
+        return `<tr class="tr" >${tr}</tr>`
     }).join("")
     //console.log(th+content)
     // tbody.innerHTML = th+content

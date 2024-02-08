@@ -2,6 +2,7 @@ const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron')
 
 const { join } = require("path");
 require("./db_functions.js")
+const {pedidosWindow} = require("./windows.js")
 
 
 // let result =db.select("*").from("teste")
@@ -26,9 +27,12 @@ function createWindow() {
 
 
 app.whenReady().then(async () => {
+  ipcMain.on("pedidos-Window",pedidosWindow);
+  
   createWindow()
 
 });
+
 
 app.on("window-all-closed", () => {
   // Your Code
