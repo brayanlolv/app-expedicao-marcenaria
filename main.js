@@ -27,7 +27,11 @@ function createWindow() {
 
 
 app.whenReady().then(async () => {
-  ipcMain.on("pedidos-Window",pedidosWindow);
+  ipcMain.on("pedidos-Window",(event,args)=>{
+    console.log(args)
+    pedidosWindow(args)
+  }
+);
   
   createWindow()
 

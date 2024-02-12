@@ -2,13 +2,13 @@ const {BrowserWindow} = require('electron')
 const { join } = require("path");
 
 function pedidosWindow(arguments) {
-    console.log("pedidos window")
+    console.log(arguments.id)
     const win = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
             preload: join(__dirname, "preload.js"),
-            sandbox: false,//uai ????
+            sandbox: false,//uai ????   
         },
         globals: {id: 17}
     })

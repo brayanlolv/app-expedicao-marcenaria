@@ -22,7 +22,8 @@ contextBridge.exposeInMainWorld('db',{
   add:add,
   getPedidos:getPedidos,
   pedidosWindow:(arguments)=>{
-    console.log("chamdo pleo preload")
+    console.log("preload")
+    console.log(arguments)
     ipcRenderer.send("pedidos-Window",arguments)}
 }
 
