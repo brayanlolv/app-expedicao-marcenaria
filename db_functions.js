@@ -71,7 +71,7 @@ async function getPedidos({ id = null, codigo = null, cliente_id = null, } = {},
 
 
 
-getPedidos({}, true)
+// getPedidos({}, true)
 module.exports = { getItems, add, getCostumers, getPedidos }
 
 

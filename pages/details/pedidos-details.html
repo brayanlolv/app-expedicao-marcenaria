@@ -12,15 +12,34 @@
 
     <div id="ola"></div>
 
+
+    <table id="table-pedidos">
+
+        
+
+    </table>
+
+
 </body>
 <script>
 
     const urlParams = new URLSearchParams(window.location.search);
     //const myParam = urlParams.get('test')
     //console.log(myParam)
-    const id = urlParams.get("id")
+    //const id = urlParams.get("id")
+    //document.querySelector("#ola").innerHTML = id
 
-    document.querySelector("#ola").innerHTML = id
+   const pedidoTable = document.querySelector("#table-pedidos")
+
+    async function render(){
+        let items = await window.db.getPedidos({id:id},true)
+        console.log(items)
+        pedidoTable.innerHTML = window.db.getTable(items, ["id", "nome", "codigo", "data", "endereco"])
+
+    }render()
+
+
+    //fazer a parte do items_pedidos
 
 </script>
 
