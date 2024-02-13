@@ -10,11 +10,18 @@
 <body>
     <a href="../index.html">pagina inicial</a>
 
-
+    <div id="ola"></div>
 
 </body>
-    <script>
-        console.log(global.id);
-    </script>
+<script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    //const myParam = urlParams.get('test')
+    //console.log(myParam)
+    const id = urlParams.get("id")
+
+    document.querySelector("#ola").innerHTML = id
+
+</script>
 
 </html>

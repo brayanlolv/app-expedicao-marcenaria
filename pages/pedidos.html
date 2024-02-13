@@ -34,7 +34,7 @@
             tr[i].addEventListener("click",()=>{
                 let id = tr[i].querySelector("td").innerText
                 console.log(id)
-            window.db.pedidosWindow({id:34})
+            window.db.pedidosWindow({id:parseInt(id)})
             })
            }
 
