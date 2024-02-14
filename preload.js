@@ -1,5 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron')
-const {getItems,add, getCostumers, getPedidos} = require("./db_functions")
+const {getItems,add, getCostumers, getPedidos,getItems_pedidos} = require("./db_functions")
 const {getTable} = require("./pageInterations")
 const {pedidosWindow} = require("./windows")
 
@@ -24,8 +24,9 @@ contextBridge.exposeInMainWorld('db',{
   pedidosWindow:(arguments)=>{
     console.log("preload")
     console.log(arguments)
-    ipcRenderer.send("pedidos-Window",arguments)}
-}
+    ipcRenderer.send("pedidos-Window",arguments)},
+    getItems_pedidos:getItems_pedidos
+  }
 
 
 )

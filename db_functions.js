@@ -9,6 +9,8 @@ let db = require("knex")({
   useNullAsDefault: true
 })
 
+//brayanlolv2
+
 async function add(table, insertParam = {}) {
   console.log("add")
   db(table).insert(insertParam).then(`adicionado à ${table}`).catch(err => console.log("deu ruim, " + err))
@@ -26,13 +28,14 @@ async function getCostumers({ id = null, name = null, telefone = null, cpf = nul
   return result
 
 }
+//pedrof0199
 
 async function getItems({ id = null, name = null } = {}) {
   let whereParam = {}
   if (typeof (id) == "number") { whereParam.id = id }
   else if (name) { whereParam.nome = name }
   const result = await db.select("*").from("items").where(whereParam)
-  console.log(result)
+  // console.log(result)
   return result
 }
 
@@ -69,18 +72,43 @@ async function getPedidos({ id = null, codigo = null, cliente_id = null, } = {},
 
 }
 
+async function getItems_pedidos(id,details = false){
+  
+  const result = await db.select("*").from("pedidos_itens").where({pedido_id:id})
+
+  if(!details)return  result
+
+  for(let i = 0;i < result.length;){
+    await getItems({ id: result[i].item_id }).then((item) => {
+      // console.log(item)
+      result[i].nome = item[0].nome
+      result[i].descricao = item[0].descricao
+      result[i].img_url = item[0].img_url
+
+      i++
+    })
+  }
+  // console.log(result)
+  return result
+
+}
+
+
 
 
 // getPedidos({}, true)
-module.exports = { getItems, add, getCostumers, getPedidos }
+module.exports = { getItems, add, getCostumers, getPedidos,getItems_pedidos }
 
-
+//  let x = async()=>{
+//  console.log(await getItems_pedidos(2,{nome:true})) 
+// }
+// x()
 
 
 
 ////////////////////////teste await
 // insert("items",{
-//   nome:"puxador",
+//   nome:"puxador",  
 //   descricao:"serve para puxar"
 // })
 //insert("items")

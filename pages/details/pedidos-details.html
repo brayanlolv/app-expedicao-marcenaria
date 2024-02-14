@@ -13,12 +13,25 @@
     <div id="ola"></div>
 
 
-    <table id="table-pedidos">
+    <table id="table-pedidos"></table>
 
-        
+<br>
+    <form > adcionar items  
 
-    </table>
+        <select name="" id="">
+            <option value="" selected disabled hidden>escolha pelo nome</option>
+        </select>
+        ou 
+        <input type="number" placeholder="item_id">
 
+        <br>
+        <input type="number" name="" id="" placeholder="quantidade">
+
+
+    </form>
+    <br>
+
+    <table id="items_pedidos" ></table>
 
 </body>
 <script>
@@ -26,18 +39,29 @@
     const urlParams = new URLSearchParams(window.location.search);
     //const myParam = urlParams.get('test')
     //console.log(myParam)
-    //const id = urlParams.get("id")
+    const id = parseInt(urlParams.get("id"))
     //document.querySelector("#ola").innerHTML = id
 
    const pedidoTable = document.querySelector("#table-pedidos")
 
     async function render(){
-        let items = await window.db.getPedidos({id:id},true)
-        console.log(items)
-        pedidoTable.innerHTML = window.db.getTable(items, ["id", "nome", "codigo", "data", "endereco"])
+        let pedido = await window.db.getPedidos({id:id},true)
+        //  console.log(pedido)
+        pedidoTable.innerHTML = window.db.getTable(pedido, ["id", "nome", "codigo", "data", "endereco"])
 
     }render()
 
+    //nao ta testado
+    const items_pedidosTable = document.querySelector("#items_pedidos")
+    async function itemsTable(){
+        
+        console.log("testando items-pedidos")
+        let items = await window.db.getItems_pedidos(id,true)
+        console.log(items)
+        items_pedidosTable.innerHTML = window.db.getTable(items, ["item_id","nome","quantidade","descricao","img_url"])
+
+    }itemsTable()
+    
 
     //fazer a parte do items_pedidos
 
