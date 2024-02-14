@@ -1,7 +1,5 @@
-const { where } = require("sequelize")
-const { contextBridge, ipcRenderer } = require('electron')
+
 const knex = require("knex")
-console.log("db function")
 
 let db = require("knex")({
   client: "sqlite3",
@@ -10,6 +8,8 @@ let db = require("knex")({
 })
 
 //brayanlolv2
+
+
 
 async function add(table, insertParam = {}) {
   console.log("add")
@@ -29,6 +29,11 @@ async function getCostumers({ id = null, name = null, telefone = null, cpf = nul
 
 }
 //pedrof0199
+async function getItemsSelect() {
+  const result = await db.select("id","nome").from("items")
+   console.log(result)
+  return result
+}
 
 async function getItems({ id = null, name = null } = {}) {
   let whereParam = {}
@@ -97,7 +102,7 @@ async function getItems_pedidos(id,details = false){
 
 
 // getPedidos({}, true)
-module.exports = { getItems, add, getCostumers, getPedidos,getItems_pedidos }
+module.exports = { getItems, add, getCostumers, getPedidos,getItems_pedidos,getItemsSelect }
 
 //  let x = async()=>{
 //  console.log(await getItems_pedidos(2,{nome:true})) 

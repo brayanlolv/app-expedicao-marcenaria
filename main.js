@@ -1,16 +1,11 @@
-const { app, BrowserWindow, ipcMain, ipcRenderer } = require('electron')
-
-const { join } = require("path");
-require("./db_functions.js")
-const {pedidosWindow} = require("./windows.js")
-
+const { app, BrowserWindow,ipcMain} = require('electron')
 
 // let result =db.select("*").from("teste")
 // // console.log(result)
 // result.then((rows)=>console.log(rows))
 
-
 function createWindow() {
+  const { join } = require("path");
   const win = new BrowserWindow({
     width: 800,
     height: 600,
@@ -29,9 +24,9 @@ function createWindow() {
 app.whenReady().then(async () => {
   ipcMain.on("pedidos-Window",(event,args)=>{
     console.log(args)
+    const {pedidosWindow} = require("./windows.js")
     pedidosWindow(args)
-  }
-);
+  });
   
   createWindow()
 

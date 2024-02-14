@@ -21,10 +21,39 @@ function getTable( resultArray, columnsArray) {
     return(th+content)
 }
 
-module.exports = {getTable}
+
+ function getselect(resultArray,keys){
+
+    console.log("get select")
+    let result = resultArray.map((element)=>{
+        return `<option values="${element.id}"> ${element.nome} </option>`
+    }).join("")
+
+    console.log(result)
+    return result
+
+}
+
+
+module.exports = {getTable,getselect}
 
 
 /////////////////////teste
+
+// let teste = [
+//     { id: 1, nome: '' },
+//     { id: 9, nome: 'bora' },
+//     { id: 2, nome: 'corredica' },
+//     { id: 3, nome: 'dorbadica' },
+//     { id: 7, nome: 'dsadsad' },
+//     { id: 4, nome: 'parafuso' },
+//     { id: 6, nome: 'piton' },
+//     { id: 5, nome: 'puxador' },
+//     { id: 8, nome: 'teste' }
+//   ]
+  
+
+// getselect(teste,["id","nome"])
 
 // const resultArray = [
 //     { id: 1, nome: '', descricao: null, 'img-url': null },
