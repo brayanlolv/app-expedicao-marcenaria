@@ -14,7 +14,14 @@
         <summary>adcionar item</summary>
 
         <form>
-
+            
+            <input type="text" placeholder="codigo" id="codigo">
+            <input type="text" placeholder="descricao" id="descricao">
+            <input type="text" placeholder="data" id="data">
+            <!-- mudar essa data por um type date -->
+            <input type="number" placeholder="cliente_id" id="cliente_id">
+            <input type="text" placeholder="endereco" id="endereco">
+            <input type="submit" value="adcionar" name="" id="">
         </form>
     </details>
 
@@ -39,6 +46,29 @@
            }
 
         } createTable()
+
+        document.querySelector("form").addEventListener("submit",async (e)=>{ 
+            e.preventDefault()
+
+            let page = {
+                codigo: document.querySelector("#codigo"),
+                descricao: document.querySelector("#descricao"),
+                data: document.querySelector("#data"),
+                cliente_id: document.querySelector("#cliente_id"),
+                endereco: document.querySelector("#endereco")
+            }
+
+            await window.db.add("pedidos",{
+                codigo:page.codigo.value,
+                descricao:page.descricao.value,
+                data:page.data.value,
+                cliente_id:page.cliente_id.value,
+                endereco:page.endereco.value
+            })
+            createTable()
+
+        })
+
     </script>
 
 </body>
