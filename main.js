@@ -1,5 +1,6 @@
 const { app, BrowserWindow,ipcMain} = require('electron')
-
+//gn gen out/Release-x86 --args="import(\"//electron/build/args/release.gn\") target_cpu=\"x86\""
+//gn gen out/Release-x86 --args="import(\"//electron/build/args/release.gn\") target_cpu=\"x64\""
 // let result =db.select("*").from("teste")
 // // console.log(result)
 // result.then((rows)=>console.log(rows))

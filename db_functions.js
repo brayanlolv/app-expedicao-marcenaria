@@ -3,7 +3,7 @@ const knex = require("knex")
 
 let db = require("knex")({
   client: "sqlite3",
-  connection: "../myteste.db",
+  connection: "./myteste.db",
   useNullAsDefault: true
 })
 
@@ -29,11 +29,24 @@ async function getCostumers({ id = null, name = null, telefone = null, cpf = nul
 
 }
 //pedrof0199
+
+
+
 async function getItemsSelect() {
   const result = await db.select("id","nome").from("items")
    console.log(result)
   return result
 }
+
+async function getItems({ id = null, name = null } = {}) {
+  let whereParam = {}
+  if (typeof (id) == "number") { whereParam.id = id }
+  else if (name) { whereParam.nome = name }
+  const result = await db.select("*").from("items").where(whereParam)
+  // console.log(result)
+  return result
+}
+
 
 async function getItems({ id = null, name = null } = {}) {
   let whereParam = {}
@@ -67,7 +80,7 @@ async function getPedidos({ id = null, codigo = null, cliente_id = null, } = {},
   }
 
   // result.map(async (row) => {
-  //   console.log(row.cliente_id)
+    //   console.log(row.cliente_id)
     
 
   // }) nao funcionou o async do jeito q precisava
@@ -99,10 +112,38 @@ async function getItems_pedidos(id,details = false){
 }
 
 
+async function getItems_ambientes(id,details = false){
+  
+  const result = await db.select("*").from("ambientes_itens").where({pedido_id:id})
 
+  if(!details)return  result
+
+  for(let i = 0;i < result.length;){
+    await getItems({ id: result[i].item_id }).then((item) => {
+      // console.log(item)
+      result[i].nome = item[0].nome
+      result[i].descricao = item[0].descricao
+      result[i].img_url = item[0].img_url
+
+      i++
+    })
+  }
+  // console.log(result)
+  return result
+
+}
+
+async function getAmbientes(pedido_id){
+
+  const result = await db.select("*").from("pedidos_ambiente").where({pedido_id:pedido_id})
+  console.log(result)
+  return result
+} 
+
+// getAmbientes(1)
 
 // getPedidos({}, true)
-module.exports = { getItems, add, getCostumers, getPedidos,getItems_pedidos,getItemsSelect }
+module.exports = { getItems, add, getCostumers, getPedidos,getItems_pedidos,getItemsSelect, getAmbientes,getItems_ambientes }
 
 //  let x = async()=>{
 //  console.log(await getItems_pedidos(2,{nome:true})) 

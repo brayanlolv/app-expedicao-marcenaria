@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>pedidos 2 
+
+    </title>
 </head>
 
 <body>
@@ -40,8 +42,9 @@
            for(let i = 0; i< tr.length;i++){
             tr[i].addEventListener("click",()=>{
                 let id = tr[i].querySelector("td").innerText
-                console.log(id)
-            window.db.pedidosWindow({id:parseInt(id), windowpath:"pages/details/pedidos-details.html"})
+                
+            window.db.pedidosWindow({id:parseInt(id),
+                                    windowpath:"pages/details/pedidos-ambientes.html"})
             })
            }
 
@@ -49,6 +52,8 @@
 
         document.querySelector("form").addEventListener("submit",async (e)=>{ 
             e.preventDefault()
+
+            
 
             let page = {
                 codigo: document.querySelector("#codigo"),
@@ -66,6 +71,8 @@
                 endereco:page.endereco.value
             })
             createTable()
+
+     
 
         })
 

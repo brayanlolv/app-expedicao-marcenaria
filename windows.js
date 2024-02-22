@@ -6,7 +6,12 @@ const { join } = require("path");
 const url = require('url')
 
 function pedidosWindow(arguments) {
-    console.log(arguments.id)
+
+  console.log("window")
+  console.log(arguments.windowpath)
+
+
+
     const win = new BrowserWindow({
         width: 800,
         height: 600,
@@ -20,7 +25,7 @@ function pedidosWindow(arguments) {
     win.loadURL(url.format({
         slashes: true,
         protocol: 'file:',
-        pathname: path.resolve(app.getAppPath(), "pages/details/pedidos-details.html"),
+        pathname: path.resolve(app.getAppPath(), arguments.windowpath),
         query: {
           test: 'test',
           id:arguments.id
