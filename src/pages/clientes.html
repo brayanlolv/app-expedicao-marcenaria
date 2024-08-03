@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="../styles/index.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="topbar">
+
+        <a href="../index.html">pagina inicial</a>
+        
+        <details>
+        <summary class="btn btn-primary">cadastrar cliente</summary>
+
+        <form class="container form text-center" >
+            
+            
+            
+    
+            <div class="form-floating mb-2"><input class="form-control"   type="text" id="nome">
+                <label for="nome">nome</label>
+            </div>
+
+            <div class="form-floating mb-2"> <input class="form-control"  type="text" id="cpf">
+                <label for="cpf">cpf</label>
+            </div>
+            
+            <div class="form-floating mb-2"> <input class="form-control"  type="text" id="telefone">
+                <label for="telefone">telefone </label>
+            </div>
+
+            <div class="form-floating mb-2"> <input class="form-control"  type="text" id="email">
+                <label for="email">email </label>
+            </div>
+
+            <div class="form-floating mb-2"> 
+                <!-- <label for="submit">cadastrar </label> -->
+                <!-- <input class="form-control" placeholder="" id="submit" type="submit"> -->
+                <button class="form-control" type="submit">cadastrar</button>
+            </div>
+
+        </form>
+
+    </details>
+</div>
+
+    <table id="table"></table>
+
+    <script>
+
+
+
+        const table = document.querySelector("#table")
+        async function createTable() {
+            let items = await window.db.getCostumers()
+            // console.log(items) 
+            table.innerHTML = window.db.getTable(items, ["id", "nome", "cpf", "telefone", "email"]
+            )
+
+        } createTable()
+
+        document.querySelector("form").addEventListener("submit", async (e) => {
+            e.preventDefault()
+
+            const nome = document.querySelector("#nome")
+            const cpf = document.querySelector("#cpf")
+            const telefone = document.querySelector("#telefone")
+            const email = document.querySelector("#email")
+
+            window.db.add("clientes", {
+                nome: nome.value,
+                cpf: cpf.value,
+                telefone: telefone.value,
+                email: email.value
+            })
+            createTable()
+
+
+        })
+    </script>
+
+</body>
+
+</html>

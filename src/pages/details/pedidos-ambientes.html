@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>Document</title>
+</head>
+<body>
+    
+    pedidos ambientes
+
+    <table id="ambientes-table" ></table>
+
+    <script>
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const id = parseInt(urlParams.get("id"))
+
+        const table = document.querySelector("#ambientes-table")
+        async function ambientesrender(){ 
+            let pedidos = await window.db.getAmbientes(id)
+            console.log(pedidos)
+
+            table.innerHTML =  window.db.getTable(pedidos,["id","descricao"])
+
+            let tr = document.getElementsByClassName("tr")
+            //let tr = document.querySelectorAll(".tr")
+           for(let i = 0; i< tr.length;i++){
+            tr[i].addEventListener("click",()=>{
+                let id = tr[i].querySelector("td").innerText
+                console.log(id)
+            window.db.pedidosWindow({id:parseInt(id), windowpath:"pages/details/ambientes-details.html"})
+            })}
+        } ambientesrender()
+
+
+    </script>
+
+</body>
+</html>

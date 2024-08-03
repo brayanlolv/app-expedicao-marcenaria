@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"> <link rel="stylesheet" href="styles/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pedidos 2 
+
+    </title>
+</head>
+
+<body>
+    <a href="../index.html">pagina inicial</a>
+
+    <details>
+        <summary>adcionar item</summary>
+
+        <form>
+            
+            <input type="text" placeholder="codigo" id="codigo">
+            <input type="text" placeholder="descricao" id="descricao">
+            <input type="text" placeholder="data" id="data">
+            <!-- mudar essa data por um type date -->
+            <input type="number" placeholder="cliente_id" id="cliente_id">
+            <input type="text" placeholder="endereco" id="endereco">
+            <input type="submit" value="adcionar" name="" id="">
+        </form>
+    </details>
+
+
+    <table id="table"></table>
+
+    <script>
+        const table = document.querySelector("#table")
+        async function createTable() {
+            let items = await window.db.getPedidos({},true)  
+             //<!-- console.log(items)  -->
+            table.innerHTML = window.db.getTable(items, ["id", "nome", "codigo", "data", "endereco"]
+            )
+            let tr = document.getElementsByClassName("tr")
+            //let tr = document.querySelectorAll(".tr")
+           for(let i = 0; i< tr.length;i++){
+            tr[i].addEventListener("click",()=>{
+                let id = tr[i].querySelector("td").innerText
+                
+            window.db.pedidosWindow({id:parseInt(id),
+                                    windowpath:"pages/details/pedidos-ambientes.html"})
+            })
+           }
+
+        } createTable()
+
+        document.querySelector("form").addEventListener("submit",async (e)=>{ 
+            e.preventDefault()
+
+            
+
+            let page = {
+                codigo: document.querySelector("#codigo"),
+                descricao: document.querySelector("#descricao"),
+                data: document.querySelector("#data"),
+                cliente_id: document.querySelector("#cliente_id"),
+                endereco: document.querySelector("#endereco")
+            }
+
+            await window.db.add("pedidos",{
+                codigo:page.codigo.value,
+                descricao:page.descricao.value,
+                data:page.data.value,
+                cliente_id:page.cliente_id.value,
+                endereco:page.endereco.value
+            })
+            createTable()
+
+     
+
+        })
+
+    </script>
+
+</body>
+
+</html>

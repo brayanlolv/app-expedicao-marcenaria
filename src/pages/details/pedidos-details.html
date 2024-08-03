@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="../../index.html">pagina inicial</a>
+
+    <div id="ola"></div>
+
+
+    <table id="table-pedidos"></table>
+
+    <br>
+    <form > adcionar items
+
+        <select name="" id="select">
+            <option value="" selected disabled hidden>escolha pelo nome</option>
+        </select>
+        ou
+        <input type="number" placeholder="item_id" id="item_id">
+
+        <br>
+        <input type="number" name="" id="quantidade" placeholder="quantidade">
+        <input type="submit" value="ola">
+
+    </form>
+    <br>
+
+    <table id="items_pedidos"></table>
+
+</body>
+<script>
+
+    const urlParams = new URLSearchParams(window.location.search);
+    //const myParam = urlParams.get('test')
+    //console.log(myParam)
+    const id = parseInt(urlParams.get("id"))
+    //document.querySelector("#ola").innerHTML = id
+
+    const pedidoTable = document.querySelector("#table-pedidos")
+    const select = document.querySelector("#select")
+
+    async function createSelect(){
+        let itemsselect = await window.db.getItemsSelect()
+        let selectString =  window.db.getselect(itemsselect,["id","nome"]) 
+        select.innerHTML =  selectString 
+        console.log(selectString)
+    }createSelect()
+
+    async function render() {
+        let pedido = await window.db.getPedidos({ id: id }, true)
+        //  console.log(pedido)
+        pedidoTable.innerHTML = window.db.getTable(pedido, ["id", "nome", "codigo", "data", "endereco"])
+           
+        //fazendo o select
+        
+    } render()
+
+    
+    //nao ta testado
+    const items_pedidosTable = document.querySelector("#items_pedidos")
+    
+    async function itemsTable() {
+
+        //console.log("testando items-pedidos")
+        let items = await window.db.getItems_pedidos(id, true)
+        //console.log(items)
+        items_pedidosTable.innerHTML = window.db.getTable(items, ["item_id", "nome", "quantidade", "descricao", "img_url"])
+
+     
+        
+       
+    } itemsTable()
+
+    document.querySelector("form").addEventListener("submit",async (e)=>{
+        e.preventDefault()
+        console.log("adcionar item")
+        let item_id_input = document.querySelector("#item_id")
+
+        
+        
+        console.log(item_id_input.value)
+        let item_id = select.value ? select.value: item_id_input.value
+        let quantidade = document.querySelector("#quantidade")
+
+        if(!item_id)return 
+
+        await  window.db.add("pedidos_itens",{
+            pedido_id:id,
+            item_id:item_id,
+            quantidade:quantidade.value
+        })
+        itemsTable()
+    })
+
+    //fazer a parte do items_pedidos
+
+</script>
+
+</html>
