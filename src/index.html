@@ -2,8 +2,9 @@
 <html>
 
 <head>
+  <script src="pages/hooks/modal.js"></script>
   <link rel="stylesheet" href="styles/index.css">
-  <script>console.log("é isso")</script>
+  <link rel="stylesheet" href="styles/modal.css">
   <meta charset="UTF-8">
   <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
   <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
@@ -14,7 +15,7 @@
 
 <body>
 
-  
+
 
 
   <H1>controlador de expedicao para marcenaria</H1>
@@ -43,10 +44,19 @@
 
   </details>
 
+  <button id="modal-btn">teste modal</button>
+  <div class="modal">
 
-<script>
+    <div id="modal-content" class="modal-content">conteudo do modal</div>
+  </div>
 
-</script>
+  <script>
+    const modalBtn = document.querySelector("#modal-btn")
+    const modal = document.querySelector(".modal")
+    createModal(modalBtn, modal)
+
+
+  </script>
 
 
 

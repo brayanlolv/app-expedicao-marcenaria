@@ -2,7 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"> <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="../styles/modal.css">
+    <script src="hooks/modal.js"></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../styles/index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
@@ -10,11 +13,13 @@
 <body>
     <a href="../index.html">pagina inicial</a>
 
-    <details>
-        <summary>adcionar item</summary>
 
-        <form>
-            
+        <button id="modal-btn">adcionar item</button>
+
+        <div class="modal">
+
+            <form class="container form text-center modal-content">
+                
             <input type="text" placeholder="codigo" id="codigo">
             <input type="text" placeholder="descricao" id="descricao">
             <input type="text" placeholder="data" id="data">
@@ -23,31 +28,38 @@
             <input type="text" placeholder="endereco" id="endereco">
             <input type="submit" value="adcionar" name="" id="">
         </form>
-    </details>
+    </div>
+
 
 
     <table id="table"></table>
 
     <script>
+
+const modalBtn = document.querySelector("#modal-btn")
+        const modal = document.querySelector(".modal")
+        createModal(modalBtn, modal)
+
+
         const table = document.querySelector("#table")
         async function createTable() {
-            let items = await window.db.getPedidos({},true)  
-             //<!-- console.log(items)  -->
+            let items = await window.db.getPedidos({}, true)
+            //<!-- console.log(items)  -->
             table.innerHTML = window.db.getTable(items, ["id", "nome", "codigo", "data", "endereco"]
             )
             let tr = document.getElementsByClassName("tr")
             //let tr = document.querySelectorAll(".tr")
-           for(let i = 0; i< tr.length;i++){
-            tr[i].addEventListener("click",()=>{
-                let id = tr[i].querySelector("td").innerText
-                console.log(id)
-            window.db.pedidosWindow({id:parseInt(id), windowpath:"pages/details/pedidos-details.html"})
-            })
-           }
+            for (let i = 0; i < tr.length; i++) {
+                tr[i].addEventListener("click", () => {
+                    let id = tr[i].querySelector("td").innerText
+                    console.log(id)
+                    window.db.pedidosWindow({ id: parseInt(id), windowpath: "pages/details/pedidos-details.html" })
+                })
+            }
 
         } createTable()
 
-        document.querySelector("form").addEventListener("submit",async (e)=>{ 
+        document.querySelector("form").addEventListener("submit", async (e) => {
             e.preventDefault()
 
             let page = {
@@ -58,12 +70,12 @@
                 endereco: document.querySelector("#endereco")
             }
 
-            await window.db.add("pedidos",{
-                codigo:page.codigo.value,
-                descricao:page.descricao.value,
-                data:page.data.value,
-                cliente_id:page.cliente_id.value,
-                endereco:page.endereco.value
+            await window.db.add("pedidos", {
+                codigo: page.codigo.value,
+                descricao: page.descricao.value,
+                data: page.data.value,
+                cliente_id: page.cliente_id.value,
+                endereco: page.endereco.value
             })
             createTable()
 

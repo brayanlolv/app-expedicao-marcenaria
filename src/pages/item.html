@@ -2,7 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8"> <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="../styles/modal.css">
+    <script src="hooks/modal.js"></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../styles/index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
     <!-- tirar trava de seguranca -->
@@ -10,26 +13,32 @@
 </head>
 
 <body>
-    
-    <a href="../index.html">pagina inicial</a>
-  
-    <details>
-        <summary>adcionar item</summary>
 
-        <form>
+    <a href="../index.html">pagina inicial</a>
+
+
+    <button id="modal-btn">adcionar item</button>
+
+    <div class="modal">
+        <form class="container form text-center modal-content">
 
             <input type="text" id="item-name" placeholder="nome do produto" min="1">
             <input type="text" id="item-description" placeholder="descricao">
             <input type="submit" placeholder="adcionarS">
         </form>
-    </details>
+    </div>
+
+
     <table id="table"></table>
 
     <script>
+        const modalBtn = document.querySelector("#modal-btn")
+        const modal = document.querySelector(".modal")
+        createModal(modalBtn, modal)
 
         const table = document.querySelector("#table")
         async function createTable() {
-            let items = await window.db.getItems()  
+            let items = await window.db.getItems()
             // console.log(items) 
             table.innerHTML = window.db.getTable(items, ["id", "nome", "descricao"]
             )
@@ -44,11 +53,11 @@
             const name = document.querySelector("#item-name")
             const description = document.querySelector("#item-description")
 
-            if(!name.value)return 
+            if (!name.value) return
 
-            await window.db.add("items",{
-                nome:name.value,
-                descricao:description.value
+            await window.db.add("items", {
+                nome: name.value,
+                descricao: description.value
             })
             createTable()
         })

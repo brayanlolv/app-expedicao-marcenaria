@@ -2,7 +2,9 @@
 <html lang="en">
 
 <head>
+    <script src="hooks/modal.js"></script>
     <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/modal.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
@@ -12,46 +14,49 @@
     <div class="topbar">
 
         <a href="../index.html">pagina inicial</a>
-        
-        <details>
-        <summary class="btn btn-primary">cadastrar cliente</summary>
 
-        <form class="container form text-center" >
-            
-            
-            
-    
-            <div class="form-floating mb-2"><input class="form-control"   type="text" id="nome">
-                <label for="nome">nome</label>
-            </div>
 
-            <div class="form-floating mb-2"> <input class="form-control"  type="text" id="cpf">
-                <label for="cpf">cpf</label>
-            </div>
-            
-            <div class="form-floating mb-2"> <input class="form-control"  type="text" id="telefone">
-                <label for="telefone">telefone </label>
-            </div>
+        <btn id="modal-btn" class="btn btn-primary">cadastrar cliente</btn>
+    </div>
 
-            <div class="form-floating mb-2"> <input class="form-control"  type="text" id="email">
-                <label for="email">email </label>
-            </div>
+        <div class="modal">
+            <form class="container form text-center modal-content">
 
-            <div class="form-floating mb-2"> 
-                <!-- <label for="submit">cadastrar </label> -->
-                <!-- <input class="form-control" placeholder="" id="submit" type="submit"> -->
-                <button class="form-control" type="submit">cadastrar</button>
-            </div>
 
-        </form>
 
-    </details>
-</div>
+
+                <div class="form-floating mb-2"><input class="form-control" type="text" id="nome">
+                    <label for="nome">nome</label>
+                </div>
+
+                <div class="form-floating mb-2"> <input class="form-control" type="text" id="cpf">
+                    <label for="cpf">cpf</label>
+                </div>
+
+                <div class="form-floating mb-2"> <input class="form-control" type="text" id="telefone">
+                    <label for="telefone">telefone </label>
+                </div>
+
+                <div class="form-floating mb-2"> <input class="form-control" type="text" id="email">
+                    <label for="email">email </label>
+                </div>
+
+                <div class="form-floating mb-2">
+                    <!-- <label for="submit">cadastrar </label> -->
+                    <!-- <input class="form-control" placeholder="" id="submit" type="submit"> -->
+                    <button class="form-control" type="submit">cadastrar</button>
+                </div>
+
+            </form>
+        </div>
+   
 
     <table id="table"></table>
 
     <script>
-
+        const modalBtn = document.querySelector("#modal-btn")
+        const modal = document.querySelector(".modal")
+        createModal(modalBtn, modal)
 
 
         const table = document.querySelector("#table")
