@@ -22,9 +22,18 @@
     <div class="modal">
         <form class="container form text-center modal-content">
 
-            <input type="text" id="item-name" placeholder="nome do produto" min="1">
-            <input type="text" id="item-description" placeholder="descricao">
-            <input type="submit" placeholder="adcionarS">
+            <div class="form-floating mb-2">
+                <input class="form-control" type="text" id="item-name" placeholder="nome do produto" min="1">
+                <label for="item-name">nome do item</label>
+            </div>
+            <div class="form-floating mb-2">
+                <input class="form-control" type="text" id="item-description" placeholder="descricao">
+                <label for="item-description">descrição</label>
+             </div>
+            <div class="form-floating mb-2">
+                <input class="form-control" type="submit"  placeholder="adcionar">
+                    <!-- <label for="nome">nome</label> -->
+             </div>
         </form>
     </div>
 

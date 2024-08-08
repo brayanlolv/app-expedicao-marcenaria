@@ -14,19 +14,42 @@
     <a href="../index.html">pagina inicial</a>
 
 
-        <button id="modal-btn">adcionar item</button>
+    <button id="modal-btn">adcionar item</button>
 
-        <div class="modal">
+    <div class="modal">
 
-            <form class="container form text-center modal-content">
-                
-            <input type="text" placeholder="codigo" id="codigo">
-            <input type="text" placeholder="descricao" id="descricao">
-            <input type="text" placeholder="data" id="data">
+        <form class="container form text-center modal-content">
+
+            <div class="form-floating mb-2">
+                <input  class="form-control" type="text" placeholder="codigo" id="codigo">
+                <label for="codigo">codigo</label>
+            </div>
+
+            <div class="form-floating mb-2">
+                <input  class="form-control" type="text-area" placeholder="descricao" id="descricao">
+                <label for="descricao">descrição/anotações</label>
+
+            </div>
+
+            <div class="form-floating mb-2">
+                <input  class="form-control" type="text" placeholder="data" id="data">
+                <label for="data">data</label>
+            </div>
             <!-- mudar essa data por um type date -->
-            <input type="number" placeholder="cliente_id" id="cliente_id">
-            <input type="text" placeholder="endereco" id="endereco">
-            <input type="submit" value="adcionar" name="" id="">
+
+            <div class="form-floating mb-2">
+                <input  class="form-control" type="number" placeholder="cliente_id" id="cliente_id">
+                <label for="cliente-id">id do cliente</label>
+            </div>
+           <!-- mudar para termos uma lista do clientes -->
+             <div class="form-floating mb-2">
+                <input  class="form-control" type="text" placeholder="endereco" id="endereco">
+                <label for="endereco">endereço</label>
+            </div>
+
+            <div class="form-floating mb-2">
+                <input  class="form-control" type="submit" value="adcionar" name="" id="">
+            </div>
         </form>
     </div>
 
@@ -36,7 +59,7 @@
 
     <script>
 
-const modalBtn = document.querySelector("#modal-btn")
+        const modalBtn = document.querySelector("#modal-btn")
         const modal = document.querySelector(".modal")
         createModal(modalBtn, modal)
 
