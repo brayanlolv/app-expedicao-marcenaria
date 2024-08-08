@@ -2,23 +2,24 @@
 
 function getTable( resultArray, columnsArray) {
 
-    console.log("get table")
+    console.log("get oi")
 
     let th = columnsArray.map((columnName) => `<th>${columnName}</th>`).join("")//fazer isso para os outros
-    th = ` <tr> ${th} </tr> `
+    th = `  <tr> ${th} </tr>  `
+    console.log("th é  "+ th)
     let content = resultArray.map(row => {
         let tr = ""
         for (let i = 0; i < columnsArray.length; i++) {
             let data = row[columnsArray[i]]
             // console.log(data)
-            tr += `<td> ${data}  </td>`
+            tr += `<td> ${data != null ? data : ""}  </td>`
         }
 
         return `<tr class="tr" >${tr}</tr>`
     }).join("")
     //console.log(th+content)
     // tbody.innerHTML = th+content
-    return(th+content)
+    return(th + " <tbody>" +content+"</tbody>")
 }
 
 

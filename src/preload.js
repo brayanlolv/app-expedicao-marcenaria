@@ -1,6 +1,6 @@
 const { contextBridge, ipcRenderer } = require('electron')
 const {getItems,add, getCostumers, getPedidos,getItems_pedidos, getItemsSelect, getAmbientes,getItems_ambientes} = require("./db_functions")
-const {getTable,getselect} = require("./pageInterations") // tirar essa merda daqui
+const {getTable,getselect} = require("./pageInterations") // tirar essa merda daqui//linkar no html
 
 // window.addEventListener('DOMContentLoaded', async () => {
 //   function replaceText (selector, text){
